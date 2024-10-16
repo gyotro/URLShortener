@@ -11,6 +11,7 @@ import java.util.*
 class ShortUrlService(private val redis: StringRedisTemplate)
 {
 
+    // setting enconding
     private val digest = MessageDigest.getInstance("SHA-256")
 
     fun shortener(url: String): String {
