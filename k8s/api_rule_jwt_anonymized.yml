@@ -11,12 +11,12 @@ spec:
   host: shoaut.xxxxxx.kyma.ondemand.com  # Your Kyma domain for the service
   rules:
     - methods: ["POST"]
-      path: /shorten  # This rule applies to all paths for POST requests
+      path: /shorten  # This rule applies to /shorten path for POST requests
       accessStrategies:
-        - handler: jwt  # OAuth2 introspection for POST requests
+        - handler: jwt  # JWT Handler for POST requests
           config:
             jwks_urls: 
-            - https://xxxxxx.accounts.ondemand.com/oauth2/certs # OAuth2 introspection URL
+            - https://xxxxxx.accounts.ondemand.com/oauth2/certs
             trusted_issuers:
             - https://xxxxxx.accounts.ondemand.com
     - methods: ["GET"]
