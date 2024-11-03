@@ -4,4 +4,5 @@
 
 * Spring Boot (Kotlin) application for URL Shortening, using Redis as persistency;
 * Docker and Docker Compose files for containerization;
-* YAML files for K8S deployment: SAP BTP Kyma has been choosed for deployment 
+* YAML files for K8S deployment: SAP BTP Kyma has been choosed for deployment;
+* GitHub action for Continuous Integration.
