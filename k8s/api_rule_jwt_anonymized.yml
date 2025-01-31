@@ -1,0 +1,25 @@
+apiVersion: gateway.kyma-project.io/v1beta1
+kind: APIRule
+metadata:
+  name: url-short-api-rule
+  namespace: shorturl  # Replace with your Kyma namespace
+spec:
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  service:
+    name: url-shortener  # Service name in Kyma
+    port: 8080  # Service port
+  host: shoaut.xxxxxx.kyma.ondemand.com  # Your Kyma domain for the service
+  rules:
+    - methods: ["POST"]
+      path: /shorten  # This rule applies to /shorten path for POST requests
+      accessStrategies:
+        - handler: jwt  # JWT Handler for POST requests
+          config:
+            jwks_urls: 
+            - https://xxxxxx.accounts.ondemand.com/oauth2/certs
+            trusted_issuers:
+            - https://xxxxxx.accounts.ondemand.com
+    - methods: ["GET"]
+      path: /.*  # This rule applies to all paths for GET requests
+      accessStrategies:
+        - handler: allow  # Allow unauthenticated access for GET requests
