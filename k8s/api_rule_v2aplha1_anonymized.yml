@@ -1,0 +1,28 @@
+apiVersion: gateway.kyma-project.io/v2alpha1
+kind: APIRule
+metadata:
+  name: url-short-api-rule
+  namespace: shorturl  # Replace with your Kyma namespace
+spec:
+  gateway: kyma-system/kyma-gateway
+  hosts:
+    - xx.xxxxx.kyma.ondemand.com  # Your Kyma domain for the service
+  service:
+    name: url-shortener  # Service name in Kyma
+    port: 8080
+  rules:
+    - path: /shorten
+      methods: ["POST"]
+      jwt:
+        authentications:
+          - issuer: https://xxxxxx.accounts.ondemand.com
+            jwksUri: https://xxxxxxx.accounts.ondemand.com/oauth2/certs # OAuth2 introspection URL
+    - path: /decode
+      methods: ["POST"]
+      jwt:
+        authentications:
+          - issuer: https://xxxxxx.accounts.ondemand.com
+            jwksUri: https://xxxxxx.accounts.ondemand.com/oauth2/certs # OAuth2 introspection URL
+    - path: /*
+      methods: ["GET"]
+      noAuth: true
